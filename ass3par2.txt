@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class PermanentEmp extends Employee {
+	int paid_leave, sick_leave, casual_leave;
+	double basic, hra, pfa;
+	Scanner input = new Scanner(System.in);
+
+	public PermanentEmp(double basic, int paid_leave, int sick_leave, int casual_leave) {
+		this.basic = basic;
+		this.pfa = .12 * this.basic;
+		this.hra = .50 * this.basic;
+		this.paid_leave = paid_leave;
+		this.casual_leave = casual_leave;
+		this.sick_leave = sick_leave;
+
+	}
+
+	void print_leave_details() {
+		System.out.println("total reamining leaves in your account is " + total_leaves);
+		System.out.println("total reamining paid_leaves in your account is " + paid_leave);
+		System.out.println("total reamining sick_leaves in your account is " + sick_leave);
+		System.out.println("total reamining casual_leaves in your account is " + casual_leave);
+	}
+
+	void calculate_balance_leaves() {
+		total_leaves = sick_leave + casual_leave + paid_leave;
+		System.out.println("total leaves pending =  " + total_leaves);
+	}
+
+	boolean avail_leave(int no_of_leaves, char type_of_leave) {
+		int days = no_of_leaves;
+		char type = type_of_leave;
+		if (type_of_leave == 'P') {
+			this.paid_leave = this.paid_leave - days;
+			System.out.println("Leave Applied");
+		} else if (type_of_leave == 'S') {
+			this.sick_leave = this.sick_leave - days;
+			System.out.println("Leave Applied");
+		} else if (type_of_leave == 'C') {
+			this.casual_leave = this.casual_leave - days;
+			System.out.println("Leave Applied");
+		} else {
+			System.out.println("wrong inut!!!!!");
+		}
+
+		calculate_balance_leaves();
+		return false;
+	}
+
+	void calculate_salary() {
+		double total_sal;
+		total_sal = this.basic + this.hra - this.pfa;
+		System.out.println("total salary is " + total_sal);
+
+	}
+}

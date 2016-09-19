@@ -1,0 +1,91 @@
+import java.util.Scanner;
+
+public class EmpDemo {
+	public static void main(String[] args) {
+		int chEmpType, ch;
+		double basic = 0;
+		int paid_leave = 0, casual_leave = 0, sick_leave = 0;
+		int days;
+		char leave_type;
+		Scanner input = new Scanner(System.in);
+
+		System.out.println("Enter the basic salary:");
+		basic = input.nextDouble();
+		System.out.println("Enter the total paid_leaves:");
+		paid_leave = input.nextInt();
+		System.out.println("Enter the total sick leaves:");
+		sick_leave = input.nextInt();
+		System.out.println("Enter the total casual_leaves");
+		casual_leave = input.nextInt();
+
+		System.out.println("Enter your choice of employee");
+		System.out.println("1.Permanent Employee:");
+		System.out.println("2.Temporary Employee:");
+		chEmpType = input.nextInt();
+		switch (chEmpType) {
+		case 1:
+
+			PermanentEmp PE = new PermanentEmp(basic, paid_leave, sick_leave, casual_leave);
+
+			System.out.println("Enter yor Choice:");
+			System.out.println("1.View Salary");
+			System.out.println("2.Apply Leaves");
+			System.out.println("3.View Leaves");
+			ch = input.nextInt();
+			switch (ch) {
+			case 1:
+				PE.calculate_salary();
+				break;
+			case 2:
+				System.out.println("enter the no of leaves you want: ");
+				days = input.nextInt();
+				System.out.println("enter the leave type: ");
+				System.out.println("P. Privilage leave: ");
+				System.out.println("C. Casual leave: ");
+				System.out.println("S. Sick leave: ");
+				leave_type = input.next().charAt(0);
+				PE.avail_leave(days, leave_type);
+				break;
+			case 3:
+				PE.calculate_balance_leaves();
+				break;
+
+			default:
+				break;
+			}
+		case 2:/// Temp Emp
+			TemporaryEmp TE = new TemporaryEmp(basic, paid_leave, sick_leave, casual_leave);
+
+			System.out.println("Enter yor Choice:");
+			System.out.println("1.View Salary");
+			System.out.println("2.Apply Leaves");
+			System.out.println("3.View Leaves");
+			ch = input.nextInt();
+			switch (ch) {
+			case 1:
+				TE.calculate_salary();
+				break;
+			case 2:
+				System.out.println("enter the no of leaves you want: ");
+				days = input.nextInt();
+				System.out.println("enter the leave type: ");
+				System.out.println("P. Privilage leave: ");
+				System.out.println("C. Casual leave: ");
+				System.out.println("S. Sick leave: ");
+				leave_type = input.next().charAt(0);
+				TE.avail_leave(days, leave_type);
+				break;
+			case 3:
+				TE.calculate_balance_leaves();
+				break;
+
+			default:
+				break;
+
+			}
+		default:
+			break;
+		}
+
+	}
+}
